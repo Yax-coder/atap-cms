@@ -1,0 +1,105 @@
+@extends('_layouts.admin')
+
+@section('title', 'Dashboard')
+
+@section('styles')
+    <link rel="stylesheet" type="text/css" href="/css/zabuto_calendar.css">
+    <link rel="stylesheet" type="text/css" href="/js/gritter/css/jquery.gritter.css" />
+    <link rel="stylesheet" type="text/css" href="/lineicons/style.css">
+    <script src="/js/chart-master/Chart.js"></script>
+@endsection
+
+@section('content')
+    <h3></i>EDIT STUDENT</h3>
+    <div class="row mt">
+        <div class="col-lg-12">
+            <div class="panel panel-warning">
+                <div class="panel-heading">
+                    <h3 class="panel-title">EDIT STUDENT</h3>
+                </div>
+                <div class="panel-body">
+                    <form action="{{ route('students.update', [$student->id]) }}" method="POST" autocomplete="off">
+                        {{ csrf_field() }}
+                        {{ method_field('PUT') }}
+                        <div class="form-group clearfix">
+                            <label for="matric_no" class="col-sm-2 control-label">Matric No</label>
+                            <div class="col-sm-6">
+                                <input type="text" class="form-control" id="matric_no" name="matric_no" placeholder="Eg. Dr." value="{{ $student->matric_no }}">
+                            </div>
+                        </div>
+                        <div class="form-group clearfix">
+                            <label for="first_name" class="col-sm-2 control-label required">First Name</label>
+                            <div class="col-sm-6">
+                                <input type="text" class="form-control" id="first_name" name="first_name" placeholder="First Name" required value="{{ $student->first_name }}">
+                            </div>
+                        </div>
+                        <div class="form-group clearfix">
+                            <label for="middle_name" class="col-sm-2 control-label">Middle Name</label>
+                            <div class="col-sm-6">
+                                <input type="text" class="form-control" id="middle_name" name="middle_name" placeholder="Middle Name" value="{{ $student->middle_name }}">
+                            </div>
+                        </div>
+                        <div class="form-group clearfix">
+                            <label for="last_name" class="col-sm-2 control-label required">Last Name</label>
+                            <div class="col-sm-6">
+                                <input type="text" class="form-control" id="last_name" name="last_name" placeholder="Last Name" required value="{{ $student->last_name }}">
+                            </div>
+                        </div>
+                        <div class="form-group clearfix">
+                            <label for="department" class="col-sm-2 control-label required">Departments</label>
+                            <div class="col-sm-6">
+                                <select id="department" name="department" class="form-control" required>
+                                    <option value="">Choose a Department</option>
+                                    @foreach ($departments as $department)
+                                        <option value="{{ $department->id }}"
+                                            @if ($student->department_id == $department->id)
+                                                selected="selected"
+                                            @endif
+                                        >{{ $department->name }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group clearfix">
+                            <div class="col-md-offset-2 col-sm-6">
+                                <input type="submit" class="btn btn-success btn-lg" value="Submit">
+                            </div>
+                        </div>
+                        <!-- <div class="form-group col-lg-4 col-md-4 col-sm-4">
+                            <select class="form-control col-lg-4 col-md-4 col-sm-4">
+                                <option selected>Courses Under Dept.</option>
+                                <option value="1">Accountancy</option>
+                                <option value="2">Agricultural Technology</option>
+                                <option value="3">Animal Health And Production Technology</option>
+                                <option value="3">Banking And Finance</option>
+                                <option value="3">Building Technology</option>
+                                <option value="3">Business Administration and Management</option>
+                                <option value="3">Computer Science</option>
+                                <option value="3">Electrical / Electronic Engineering</option>
+                                <option value="3">Estate Mangement And Valuation</option>
+                                <option value="3">Fisheries Technology</option>
+                                <option value="3">Forestry Technology</option>
+                                <option value="3">Mechanical Engineering Technology</option>
+                                <option value="3">Public Administration</option>
+
+                            </select>
+                        </div> -->
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+@endsection
+
+@section('modal')
+
+@endsection
+
+
+@section('scripts')
+<script src="/js/select2.full.min.js"></script>
+<script>
+    {{-- $('#lecturers').select2(); --}}
+</script>
+@endsection
